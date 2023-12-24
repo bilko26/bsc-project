@@ -1,53 +1,40 @@
-import {useEffect, useRef} from "react";
-import WebMap from "@arcgis/core/WebMap";
-import MapView from "@arcgis/core/views/MapView";
-import Bookmarks from "@arcgis/core/widgets/Bookmarks";
-import Expand from "@arcgis/core/widgets/Expand";
+import {MapContainer, TileLayer, GeoJSON} from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import "./index.css";
+import lez from "../../assets/LEZ.json"
 
-export const MyMap = () => {
-    const mapDiv = useRef(null);
 
-    useEffect(() => {
-        if (mapDiv.current) {
-            /**
-             * Initialize application
-             */
-            const webmap = new WebMap({
-                portalItem: {
-                    id: "aa1d3f80270146208328cf66d022e09c"
-                }
-            });
+function MyMap() {
 
-            const view = new MapView({
-                container: mapDiv.current,
-                map: webmap
-            });
+    /* const arrayFormatter = (array: any) => {
+         const switchCoordinates = (coords) => {
+             return coords.map((point) => [point[1], point[0]]);
+         };
 
-            const bookmarks = new Bookmarks({
-                view,
-                // allows bookmarks to be added, edited, or deleted
-                editingEnabled: true
-            });
+         const formattedArray = array.map((entry) => {
+             const switchedEntry = switchCoordinates(entry[0]);
+             return [switchedEntry];
+         });
 
-            const bkExpand = new Expand({
-                view,
-                content: bookmarks,
-                expanded: true
-            });
+         return formattedArray;
+     };
+     */
 
-            // Add the widget to the top-right corner of the view
-            view.ui.add(bkExpand, "top-right");
 
-            // bonus - how many bookmarks in the webmap?
-            webmap.when(() => {
-                if (webmap.bookmarks && webmap.bookmarks.length) {
-                    console.log("Bookmarks: ", webmap.bookmarks.length);
-                } else {
-                    console.log("No bookmarks in this webmap.");
-                }
-            });
-        }
-    }, [mapDiv]);
+    return (
+        <div className="container">
+            <MapContainer center={[55.860916, -4.251433]} zoom={13}>
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <GeoJSON
+                    data = {lez}
+                />
 
-    return <div className="mapDiv" ref={mapDiv}></div>;
+            </MapContainer>
+        </div>
+    );
 }
+
+export default MyMap;
