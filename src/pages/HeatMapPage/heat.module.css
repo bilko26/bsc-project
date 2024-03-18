@@ -22,3 +22,26 @@
   border-radius: 1rem;
   margin: 1rem 0;
 }
+
+.bottomSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+}
+
+.bottomSection > div {
+  padding: 1rem;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 50%);
+  border-radius: 1rem;
+}
+
+.infoCard {
+  text-align: center;
+  display: table;
+}
+
+.infoCard > h2 {
+  vertical-align: middle;
+  display: table-cell;
+}

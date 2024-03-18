@@ -1,10 +1,4 @@
 import Papa from 'papaparse'
-
-type TestEntry = {
-    wardname: string;
-    value: number;
-}
-
 export interface RentData {
     objectid: number,
     ward: string,
@@ -33,8 +27,8 @@ const DataProvider = {
                     download: true,
                     header: true,
                     dynamicTyping: true,
-                    complete: resolve,//resolve the promise when complete
-                    error: reject//reject the promise if there is an error
+                    complete: resolve,
+                    error: reject
                 });
             }
         )
