@@ -28,7 +28,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  margin-top: 1rem;
 }
 
 h1 {
@@ -67,4 +67,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
