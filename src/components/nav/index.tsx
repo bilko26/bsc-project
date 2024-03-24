@@ -28,7 +28,7 @@ const Navbar = () => {
   const location = useLocation();
   const slug = location.pathname;
   const [selectedTab, setSelectedTab] = React.useState(
-    links.findIndex((e) => e.id == slug)
+    links.findIndex((e) => e.id == slug),
   );
 
   return (

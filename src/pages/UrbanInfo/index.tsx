@@ -17,30 +17,35 @@ import L from "leaflet";
 import { useMemo, useState } from "react";
 import { PieChart, Tabs } from "devextreme-react";
 import { Connector, Export, Label, Series } from "devextreme-react/pie-chart";
-import {Chart, Series as ChartSeries, Legend, Tooltip} from "devextreme-react/chart";
+import {
+  Chart,
+  Series as ChartSeries,
+  Legend,
+  Tooltip,
+} from "devextreme-react/chart";
 import styles from "./urbanInfo.module.css";
 
 function UrbanInfoDashboard() {
   const cctvCount = cctv.features.length;
-  console.log(accidents)
+  console.log(accidents);
   const [selectedTab, setSelectedTab] = useState(0);
   const greenBeltAcres = useMemo(() => {
     return Math.floor(
       dp.features.reduce(
         (accumulator, currentValue) =>
           accumulator + currentValue.properties.AREA_HA,
-        0
-      )
+        0,
+      ),
     );
   }, []);
 
   const casulties = useMemo(() => {
     return Math.floor(
-        accidents.features.reduce(
-            (accumulator, currentValue) =>
-                accumulator + currentValue.properties.NUMBER_OF_CASUALTIES,
-            0
-        )
+      accidents.features.reduce(
+        (accumulator, currentValue) =>
+          accumulator + currentValue.properties.NUMBER_OF_CASUALTIES,
+        0,
+      ),
     );
   }, []);
 
@@ -58,7 +63,6 @@ function UrbanInfoDashboard() {
   const cctvIcon = getIcon("/cctv.png", 30, 30);
   const bycicle = getIcon("/bycicle.png", 40, 40);
 
-
   const changeMarker = (feature, latlng, icon) => {
     return L.marker(latlng, { icon: icon });
   };
@@ -68,7 +72,6 @@ function UrbanInfoDashboard() {
       text: `Number of accidents: ${Math.floor(arg.valueText)}`,
     };
   }
-
 
   const geo: FeatureCollection = accidents;
 
@@ -155,7 +158,10 @@ function UrbanInfoDashboard() {
               </h2>
             </div>
             <div className={styles.infoCard}>
-              <h2>There were {casulties} casulties across {accidents.features.length} accidents</h2>
+              <h2>
+                There were {casulties} casulties across{" "}
+                {accidents.features.length} accidents
+              </h2>
             </div>
           </>
         )}
@@ -172,9 +178,9 @@ function UrbanInfoDashboard() {
               />
               <Legend verticalAlignment="bottom" horizontalAlignment="center" />
               <Tooltip
-                  enabled={true}
-                  location="edge"
-                  customizeTooltip={customizeTooltip}
+                enabled={true}
+                location="edge"
+                customizeTooltip={customizeTooltip}
               />
             </Chart>
           </div>
@@ -237,7 +243,7 @@ function UrbanInfoDashboard() {
                   />
                 </LayersControl.Overlay>
                 <LayersControl.Overlay name={"Wards"}>
-                  <GeoJSON data={ward}  />
+                  <GeoJSON data={ward} />
                 </LayersControl.Overlay>
                 <LayersControl.Overlay name={"Lethal road accidents"}>
                   <GeoJSON
@@ -254,9 +260,12 @@ function UrbanInfoDashboard() {
                   />
                 </LayersControl.Overlay>
                 <LayersControl.Overlay name={"Green belt areas"}>
-                  <GeoJSON data={dp} style={{
-                    "color":"green"
-                  }}/>
+                  <GeoJSON
+                    data={dp}
+                    style={{
+                      color: "green",
+                    }}
+                  />
                 </LayersControl.Overlay>
               </LayerGroup>
             </LayersControl>

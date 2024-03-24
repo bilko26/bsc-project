@@ -31,7 +31,7 @@ function RentDashboard() {
     (e: SelectBoxTypes.ValueChangedEvent, f) => {
       f(e.value);
     },
-    []
+    [],
   );
 
   const handleClick = (event) => {
@@ -65,7 +65,7 @@ function RentDashboard() {
           (currentYear === null || value.year == currentYear) &&
           (currentWard === null || value.ward == currentWard)
         );
-      })
+      }),
     );
   }, [currentYear, rows, currentWard]);
 
@@ -114,39 +114,40 @@ function RentDashboard() {
       const avg = sum / value.length || 0;
       yearList.push({ wardname: String(key), value: avg });
     });
-    const myList: [TestEntry] = [];
+    const wardsList: [TestEntry] = [];
     wards.forEach((value, key) => {
       if (key == undefined) {
         return;
       }
       const sum = value.reduce((a, b) => a + b, 0);
       const avg = sum / value.length || 0;
-      myList.push({ wardname: String(key), value: avg });
+      wardsList.push({ wardname: String(key), value: avg });
     });
-    myList.sort((b, a) => b.wardname - a.wardname);
+    wardsList.sort((b, a) => b.wardname - a.wardname);
 
     yearList.sort((b, a) => b.wardname - a.wardname);
 
-    return { myList, yearList };
+    return { wardsList, yearList };
   }, [data]);
 
   function getColor(d) {
     return d > 1000
       ? "#800026"
       : d > 700
-      ? "#FD8D3C"
-      : d > 600
-      ? "#FEB24C"
-      : d > 500
-      ? "#FED976"
-      : "#FFEDA0";
+        ? "#FD8D3C"
+        : d > 600
+          ? "#FEB24C"
+          : d > 500
+            ? "#FED976"
+            : "#FFEDA0";
   }
 
   const getPriceForWard = useCallback(
     (ward: string) => {
-      return calculation.myList.find((value) => value.wardname == ward)?.value;
+      return calculation.wardsList.find((value) => value.wardname == ward)
+        ?.value;
     },
-    [calculation.myList]
+    [calculation.wardsList],
   );
 
   const getStyleForWard = useCallback(
@@ -161,7 +162,7 @@ function RentDashboard() {
         fillOpacity: 0.7,
       };
     },
-    [getPriceForWard]
+    [getPriceForWard],
   );
 
   function customizeTooltip(arg: { seriesName: string; valueText: number }) {
@@ -217,7 +218,7 @@ function RentDashboard() {
         <div className={styles.divider}></div>
         <Chart
           className={styles.chart}
-          dataSource={calculation.myList}
+          dataSource={calculation.wardsList}
           rotated={true}
           onPointClick={(e) => setCurrentWard(e.target.originalArgument)}
         >
