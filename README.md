@@ -1,10 +1,10 @@
 # Running the program
+In the root of the repository please install the required dependencies with `npm install`. 
 
-`npm install`
-`npm run dev`
+Having installed the required dependencies, the application can be run with `npm run dev`.
 
-
-
+The application should be accessible in the browser under  “http://localhost:5173/” .
+If you encounter any issues please contact the repository maintainer at balazs.szalay.2019@uni.strath.ac.uk .
 
 # React + TypeScript + Vite
 

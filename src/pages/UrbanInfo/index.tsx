@@ -191,7 +191,7 @@ function UrbanInfoDashboard() {
             <PieChart
               dataSource={values[1].sort(sortDays)}
               palette="Material"
-              title="Accidents by days of the week"
+              title="Accidents by road conditions"
               resolveLabelOverlapping={"shift"}
             >
               <Series argumentField="label" valueField="value">
